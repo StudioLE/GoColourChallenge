@@ -1,0 +1,20 @@
+version: '3.3'
+
+services:
+  go:
+    container_name: gocolourchallenge
+    build: .
+    environment: 
+      - HOSTNAME=0.0.0.0
+      - PORT=80
+    volumes:
+      - ./data:/srv/app/data
+    labels:
+      domain: gocolourchallenge.studiole.uk
+    restart: unless-stopped
+    networks:
+      - traefik
+networks:
+  traefik:
+    external:
+      name: traefik_web
