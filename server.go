@@ -86,7 +86,7 @@ func indexRoute(res http.ResponseWriter, req *http.Request) {
 	}
 
 	// Load the template
-	tmpl := template.Must(template.New("").Funcs(sprig.HtmlFuncMap()).ParseFiles("./views/log.html"))
+	tmpl := template.Must(template.New("").Funcs(sprig.HtmlFuncMap()).ParseFiles("./views/swatches.gohtml"))
 
 	// Define the template data
 	data := Template{
@@ -94,7 +94,7 @@ func indexRoute(res http.ResponseWriter, req *http.Request) {
 	}
 
 	// Load and parse the JSON into data
-	file, _ := ioutil.ReadFile("./data/log.json")
+	file, _ := ioutil.ReadFile("./data/swatches.json")
 	json.Unmarshal([]byte(file), &data.Swatches)
 
 	// Parse dates to time.Time
@@ -104,7 +104,7 @@ func indexRoute(res http.ResponseWriter, req *http.Request) {
 	}
 
 	// Execute the template as the response
-	tmpl.ExecuteTemplate(res, "log.html", data)
+	tmpl.ExecuteTemplate(res, "swatches.gohtml", data)
 }
 
 func cssRoute(res http.ResponseWriter, req *http.Request) {
